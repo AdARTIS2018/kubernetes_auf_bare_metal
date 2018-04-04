@@ -1,4 +1,4 @@
-#/bin/sh
+#!/bin/sh
 MASTER_IP=10.1.0.203
 mkdir -p /etc/kubernetes/pki
 cd /etc/kubernetes/pki 
