@@ -1,1 +1,1 @@
-ssh-keygen -tecdsa -b 521 -N '' -f /home/ec2-user/.ssh/id_ecdsa
+ssh-keygen -tecdsa -b 521 -N '' -f ~/.ssh/id_ecdsa
