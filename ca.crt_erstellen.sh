@@ -1,6 +1,8 @@
 #!/bin/sh
 ## https://kubernetes.io/docs/concepts/cluster-administration/certificates/
-MASTER_IP=10.1.0.203
+## 'kubeadm init' does this 4 u
+
+MASTER_IP=10.0.0.184
 
 mkdir -p /etc/kubernetes/pki
 cd /etc/kubernetes/pki 
@@ -31,12 +33,16 @@ DNS.2 = kubernetes.default
 DNS.3 = kubernetes.default.svc
 DNS.4 = kubernetes.default.svc.cluster
 DNS.5 = kubernetes.default.svc.cluster.local
+DNS.6 = master01
+DNS.7 = master01.fritz.box
 IP.1 = ${MASTER_IP}
-IP.2 = 10.96.0.1
+IP.2 = 10.0.0.187
+IP.3 = 10.0.0.188
 
 [ v3_ext ]
 authorityKeyIdentifier=keyid,issuer:always
 basicConstraints=CA:FALSE
+##keyUsage=nonRepudiation,digitalSignature,keyEncipherment
 keyUsage=keyEncipherment,dataEncipherment
 extendedKeyUsage=serverAuth,clientAuth
 subjectAltName=@alt_names" > /etc/kubernetes/pki/csr.conf
@@ -48,3 +54,12 @@ openssl x509 -req -in server.csr -CA ca.crt -CAkey ca.key \
 -extensions v3_ext -extfile csr.conf
 
 openssl x509  -noout -text -in ./server.crt
+
+##opensuse tumbleweed - other may be done the same way
+##remove older CA
+rm /usr/share/pki/trust/anchors/kubernetes.crt
+update-ca-certificates
+
+##insert newly created CA
+cp ca.crt /usr/share/pki/trust/anchors/kubernetes.crt
+update-ca-certificates
