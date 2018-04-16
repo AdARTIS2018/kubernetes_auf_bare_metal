@@ -46,6 +46,5 @@ echo "OAUTH Settings to
 ===================="
 read -p "Press RETURN"
 gofabric8 deploy --package system -n fabric8
-gofabric8 start --package=system  --namespace fabric8
 gofabric8 validate
 ##helm init
