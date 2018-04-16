@@ -36,5 +36,8 @@ source ~/.bashrc
 
 gofabric8 deploy --package system -n fabric8
 gofabric8-linux-amd64 validate
-
+echo "OAUTH Settings callback-URL to...
+>>http://keycloak-fabric8.$(minikube ip).nip.io/auth/realms/fabric8/broker/github/endpoint<<
+^^^^^^^^^^^^^^^^^^^^
+===================="
 ##helm init
