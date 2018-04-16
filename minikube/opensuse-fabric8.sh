@@ -12,7 +12,7 @@ rm -Rf ~/.minikube
 
 zypper addrepo https://download.opensuse.org/repositories/Virtualization:containers/openSUSE_Tumbleweed/Virtualization:containers.repo
 zypper refresh
-zypper install docker-machine docker-machine-kvm  libvirt helm
+zypper install docker-machine docker-machine-kvm  libvirt helm policycoreutils
 systemctl enable libvirtd.service;systemctl start libvirtd.service
 ##latest kubectl
 curl -LO https://storage.googleapis.com/kubernetes-release/release/\
@@ -28,6 +28,7 @@ eval $(minikube docker-env)
 minikube addons enable ingress
 minikube update-check
 
+##download latest fabric8
 rm -rf download.txt
 wget https://get.fabric8.io/download.txt --no-check-certificate && mv download.txt download.sh
 chmod a+x download.sh
@@ -46,5 +47,5 @@ echo "OAUTH Settings to
 read -p "Press RETURN"
 gofabric8 deploy --package system -n fabric8
 gofabric8 start --package=system  --namespace fabric8
-gofabric8-linux-amd64 validate
+gofabric8 validate
 ##helm init
