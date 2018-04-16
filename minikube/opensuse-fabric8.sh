@@ -16,16 +16,25 @@ zypper install docker-machine docker-machine-kvm  libvirt kubernetes helm
 systemctl enable libvirtd.service;systemctl start libvirtd.service
 virsh net-start default
 minikube delete
+rm -rf ~/.minik‚ube
 minikube start --vm-driver=kvm --cpus 2 --memory 14000 --disk-size 70g
 eval $(minikube docker-env)
 minikube addons enable ingress
 minikube update-check
 
-wget https://github.com/fabric8io/gofabric8/releases/download/v0.4.176/gofabric8-linux-amd64
-chmod a+x gofabric8-linux-amd64
+rm -rf download.txt
+wget https://get.fabric8.io/download.txt --no-check-certificate && mv download.txt download.sh
+chmod a+x download.sh
+./download.sh
+##wget https://github.com/fabric8io/gofabric8/releases/download/v0.4.176/gofabric8-linux-amd64
+##chmod a+x gofabric8-linux-amd64
+echo "
 export GITHUB_OAUTH_CLIENT_ID=6fbfee4e07e179c5eb66
 export GITHUB_OAUTH_CLIENT_SECRET=3a40585e0e50c26737e35abe5a22af5862b6bfe7
-./gofabric8 deploy --package system -n fabric8
-./gofabric8-linux-amd64 validate
+export PATH=$PATH:~/.fabric8/bin" > ~/.bashrc
+source ~/.bashrc
+
+gofabric8 deploy --package system -n fabric8
+gofabric8-linux-amd64 validate
 
 ##helm init
