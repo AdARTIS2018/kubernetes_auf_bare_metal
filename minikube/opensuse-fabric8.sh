@@ -33,11 +33,11 @@ export GITHUB_OAUTH_CLIENT_ID=6fbfee4e07e179c5eb66
 export GITHUB_OAUTH_CLIENT_SECRET=3a40585e0e50c26737e35abe5a22af5862b6bfe7
 export PATH=$PATH:~/.fabric8/bin" > ~/.bashrc
 source ~/.bashrc
-
-gofabric8 deploy --package system -n fabric8
-gofabric8-linux-amd64 validate
-echo "OAUTH Settings callback-URL to...
+echo "OAUTH Settings to
 >>http://keycloak-fabric8.$(minikube ip).nip.io/auth/realms/fabric8/broker/github/endpoint<<
 ^^^^^^^^^^^^^^^^^^^^
 ===================="
+read -p "Press RETURN"
+gofabric8 deploy --package system -n fabric8
+gofabric8-linux-amd64 validate
 ##helm init
