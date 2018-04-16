@@ -22,7 +22,7 @@ mv ./kubectl /usr/local/bin/kubectl
 
 virsh net-start default
 minikube delete
-rm -rf ~/.minik‚ube
+rm -rf ~/.minikube
 minikube start --vm-driver=kvm --cpus 3 --memory 14000 --disk-size 70g
 eval $(minikube docker-env)
 minikube addons enable ingress
