@@ -12,12 +12,18 @@ rm -Rf ~/.minikube
 
 zypper addrepo https://download.opensuse.org/repositories/Virtualization:containers/openSUSE_Tumbleweed/Virtualization:containers.repo
 zypper refresh
-zypper install docker-machine docker-machine-kvm  libvirt kubernetes helm
+zypper install docker-machine docker-machine-kvm  libvirt helm
 systemctl enable libvirtd.service;systemctl start libvirtd.service
+##latest kubectl
+curl -LO https://storage.googleapis.com/kubernetes-release/release/\
+$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl \
+chmod +x ./kubectl
+mv ./kubectl /usr/local/bin/kubectl
+
 virsh net-start default
 minikube delete
 rm -rf ~/.minik‚ube
-minikube start --vm-driver=kvm --cpus 2 --memory 14000 --disk-size 70g
+minikube start --vm-driver=kvm --cpus 3 --memory 14000 --disk-size 70g
 eval $(minikube docker-env)
 minikube addons enable ingress
 minikube update-check
@@ -39,5 +45,6 @@ echo "OAUTH Settings to
 ===================="
 read -p "Press RETURN"
 gofabric8 deploy --package system -n fabric8
+gofabric8 start --package=system  --namespace fabric8
 gofabric8-linux-amd64 validate
 ##helm init
