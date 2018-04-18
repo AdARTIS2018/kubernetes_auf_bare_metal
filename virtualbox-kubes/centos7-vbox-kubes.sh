@@ -3,7 +3,7 @@ echo make sure swap is off swapoff -a OR don't install a swap partition at all!!
 echo ================================
 
 yum -y --enablerepo=extras install epel-release
-yum -y install dkms net-tools mlocate wget docker
+yum -y install dkms net-tools mlocate wget docker acpid
 yum -y groupinstall "Development Tools"
 yum -y install kernel-devel
 ## vorher das Image auf dem HOST mounten _(VBoxGuestAdditions.iso)_
@@ -41,3 +41,5 @@ docker info | grep -i cgroup
 cat /etc/systemd/system/kubelet.service.d/10-kubeadm.conf |grep cgroup-driver
 echo the above lines must be equal!!!! or kubelet won't start
 kubeadm init
+
+## search and install networking addons https://kubernetes.io/docs/concepts/cluster-administration/addons/
