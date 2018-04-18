@@ -4,12 +4,14 @@
 
 ##curl -L  https://github.com/dhiltgen/docker-machine-kvm/ -o /usr/local/bin/docker-machine-driver-kvm
 ##chmod +x /usr/local/bin/docker-machine-driver-kvm
-
+###=====================
 MINIKUBE_VERSION=v0.26.0
+###=====================
+##kvm2
 curl -Lo docker-machine-driver-kvm2 https://github.com/kubernetes/minikube/releases/download/${MINIKUBE_VERSION}/docker-machine-driver-kvm2
 chmod +x docker-machine-driver-kvm2
 mv docker-machine-driver-kvm2 /usr/local/bin/
-
+##minikube
 curl -Lo minikube https://storage.googleapis.com/minikube/releases/${MINIKUBE_VERSION}/minikube-linux-amd64
 chmod +x minikube 
 mv minikube /usr/local/bin/
