@@ -1,6 +1,8 @@
 #!/bin/bash
 echo make sure swap is off swapoff -a OR don't install a swap partition at all!!!
 echo ================================
+echo you need 2 network adapter one NAT or bridged NAT
+echo and one host-only adapter (normaly 192.168.99.100 linked)
 
 yum -y --enablerepo=extras install epel-release
 yum -y install dkms net-tools mlocate wget docker acpid jq golang
@@ -49,9 +51,11 @@ sysctl --system
 echo Configure SELINUX=disabled OR permissive in the /etc/selinux/config file
 echo ========================================================================
 
+kubeadm init --pod-network-cidr=192.168.0.0/16
 docker info | grep -i cgroup
 cat /etc/systemd/system/kubelet.service.d/10-kubeadm.conf |grep cgroup-driver
-echo the above lines must be equal!!!! or kubelet won't start
-kubeadm init
+echo
+echo "the above lines must be equal!!!! or kubelet won't start"
+
 
 ## search and install networking addons https://kubernetes.io/docs/concepts/cluster-administration/addons/
