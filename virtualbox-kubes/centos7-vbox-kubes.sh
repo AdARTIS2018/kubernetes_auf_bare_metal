@@ -3,7 +3,7 @@ echo make sure swap is off swapoff -a OR don't install a swap partition at all!!
 echo ================================
 
 yum -y --enablerepo=extras install epel-release
-yum -y install dkms net-tools mlocate wget docker acpid jq
+yum -y install dkms net-tools mlocate wget docker acpid jq golang
 yum -y groupinstall "Development Tools"
 yum -y install kernel-devel
 ## vorher das Image auf dem HOST mounten _(VBoxGuestAdditions.iso)_
