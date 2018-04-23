@@ -62,5 +62,7 @@ cat /etc/systemd/system/kubelet.service.d/10-kubeadm.conf |grep cgroup-driver
 echo
 echo "the above lines must be equal!!!! or kubelet won't start"
 
+echo "export KUBECONFIG=/etc/kubernetes/admin.conf" > /etc/profile.d/myKUBECONFIG.sh
+
 
 ## search and install networking addons https://kubernetes.io/docs/concepts/cluster-administration/addons/
