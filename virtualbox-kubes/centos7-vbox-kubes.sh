@@ -34,6 +34,7 @@ cd download
 wget https://github.com/kubernetes-incubator/cri-tools/archive/master.zip
 unzip master.zip
 cd cri-tools-master
+make
 make install
 export PATH=$PATH:/usr/local/bin
 echo "export PATH=\$PATH:/usr/local/bin" > /etc/profile.d/myPATH.sh
