@@ -1,4 +1,7 @@
 #!/bin/bash
+## on HOST
+## VBoxManage modifyvm kubemaster --natpf1 "ssh,tcp,,30022,,22"
+## ssh -p 30022 root@localhost
 echo make sure swap is off swapoff -a OR don't install a swap partition at all!!!
 echo ================================
 echo you need 2 network adapter one NAT (bridged NAT does not work !!!)
