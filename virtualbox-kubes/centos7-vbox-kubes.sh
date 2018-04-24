@@ -66,3 +66,5 @@ echo "export KUBECONFIG=/etc/kubernetes/admin.conf" > /etc/profile.d/myKUBECONFI
 
 
 ## search and install networking addons https://kubernetes.io/docs/concepts/cluster-administration/addons/
+kubectl apply -f \
+https://docs.projectcalico.org/v3.1/getting-started/kubernetes/installation/hosted/kubeadm/1.7/calico.yaml
