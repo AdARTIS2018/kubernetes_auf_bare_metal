@@ -2,10 +2,10 @@
 ## on HOST
 ## VBoxManage modifyvm kubemaster --natpf1 "ssh,tcp,,30022,,22"
 ## ssh -p 30022 root@localhost
-echo make sure swap is off swapoff -a OR don't install a swap partition at all!!!
-echo ================================
-echo you need 2 network adapter one NAT (bridged NAT does not work !!!)
-echo and one host-only adapter (normaly 192.168.99.100 linked)
+echo "make sure swap is off swapoff -a OR don't install a swap partition at all!!!"
+echo "================================"
+echo "you need 2 network adapter one NAT (bridged NAT does not work !!!)"
+echo "and one host-only adapter (normaly 192.168.99.100 linked)"
 
 yum -y --enablerepo=extras install epel-release
 yum -y install dkms net-tools mlocate wget docker acpid jq golang
@@ -51,8 +51,8 @@ net.bridge.bridge-nf-call-iptables = 1
 EOF
 sysctl --system
 
-echo Configure SELINUX=disabled OR permissive in the /etc/selinux/config file
-echo ========================================================================
+echo "Configure SELINUX=disabled OR permissive in the /etc/selinux/config file"
+echo "========================================================================"
 
 mkdir -p /etc/cni/net.d
 echo 
