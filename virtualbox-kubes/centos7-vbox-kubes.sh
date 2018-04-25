@@ -4,7 +4,7 @@
 ## ssh -p 30022 root@localhost
 echo "make sure swap is off swapoff -a OR don't install a swap partition at all!!!"
 echo "================================"
-echo "you need 2 network adapter one NAT (bridged NAT does not work !!!)"
+echo "you need 2 network adapter one NAT-network (bridged NAT does not work !!!)"
 echo "and one host-only adapter (normaly 192.168.99.100 linked)"
 
 yum -y --enablerepo=extras install epel-release
@@ -58,6 +58,7 @@ sysctl --system
 systemctl disable firewalld && systemctl stop firewalld
 
 echo "Configure SELINUX=disabled OR permissive in the /etc/selinux/config file"
+echo "ALSO MAKE SURE TO ENABLE THE HOST-ONLY ADAPTER IN CentOS e.g. via nmtui "
 echo "========================================================================"
 
 mkdir -p /etc/cni/net.d
