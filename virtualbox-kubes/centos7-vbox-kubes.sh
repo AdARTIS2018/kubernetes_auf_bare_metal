@@ -44,6 +44,10 @@ make install
 export PATH=$PATH:/usr/local/bin
 echo "export PATH=\$PATH:/usr/local/bin" > /etc/profile.d/myPATH.sh
 
+echo "DO NOT INSTALL cri-tools on nodes or the node adding process WILL FAIL!!!!"
+echo "=========================================================================="
+
+
 ##centos routing problems
 cat <<EOF >  /etc/sysctl.d/k8s.conf
 net.bridge.bridge-nf-call-ip6tables = 1
@@ -51,12 +55,15 @@ net.bridge.bridge-nf-call-iptables = 1
 EOF
 sysctl --system
 
+systemctl disable firewalld && systemctl stop firewalld
+
 echo "Configure SELINUX=disabled OR permissive in the /etc/selinux/config file"
 echo "========================================================================"
 
 mkdir -p /etc/cni/net.d
 echo 
-kubeadm init --pod-network-cidr=192.168.0.0/16
+kubeadm init --pod-network-cidr=192.168.0.0/16 --apiserver-advertise-address 192.168.99.100
+
 docker info | grep -i cgroup
 cat /etc/systemd/system/kubelet.service.d/10-kubeadm.conf |grep cgroup-driver
 echo
