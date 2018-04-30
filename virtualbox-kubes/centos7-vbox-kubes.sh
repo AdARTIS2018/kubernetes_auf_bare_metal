@@ -63,7 +63,8 @@ echo "========================================================================"
 
 mkdir -p /etc/cni/net.d
 echo 
-kubeadm init --pod-network-cidr=192.168.0.0/16 --apiserver-advertise-address 192.168.99.100
+kubeadm init --pod-network-cidr=192.168.0.0/16 
+##--apiserver-advertise-address 192.168.99.100
 
 docker info | grep -i cgroup
 cat /etc/systemd/system/kubelet.service.d/10-kubeadm.conf |grep cgroup-driver
@@ -72,7 +73,9 @@ echo "the above lines must be equal!!!! or kubelet won't start"
 
 echo "export KUBECONFIG=/etc/kubernetes/admin.conf" > /etc/profile.d/myKUBECONFIG.sh
 
-
 ## search and install networking addons https://kubernetes.io/docs/concepts/cluster-administration/addons/
 kubectl apply -f \
 https://docs.projectcalico.org/v3.1/getting-started/kubernetes/installation/hosted/kubeadm/1.7/calico.yaml
+
+kubectl create clusterrolebinding add-on-cluster-admin --clusterrole=cluster-admin --serviceaccount=kube-system:default
+## important ^^
